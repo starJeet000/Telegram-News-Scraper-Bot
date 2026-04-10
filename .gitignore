@@ -1,0 +1,9 @@
+# Dependency directories
+node_modules/
+
+# Environment variables (Never push your secrets to GitHub!)
+.env
+.env.local
+
+# Mac/OS system files
+.DS_Store
