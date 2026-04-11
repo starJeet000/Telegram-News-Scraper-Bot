@@ -1,6 +1,5 @@
 import * as cheerio from 'cheerio';
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { log } from 'node:console';
 
 //environment variables
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
@@ -70,9 +69,8 @@ async function sendToTelegram(message) {
       body: JSON.stringify({
         chat_id: TELEGRAM_CHAT_ID,
         text: message,
-        parse_mode: 'Markdown'    //allows llm to format with bold/italic
+        parse_mode: 'Markdown'
       })
-
     });
 
     if (!response.ok) {
