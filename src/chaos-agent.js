@@ -61,7 +61,7 @@ async function generateCynicalBriefing(headlines) {
 
 async function sendToTelegram(message) {
   console.log("Sending Briefing to Telegram...");
-  const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getUpdates`;
+  const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
 
   try {
     const response = await fetch(url, {
@@ -70,7 +70,7 @@ async function sendToTelegram(message) {
       body: JSON.stringify({
         chat_id: TELEGRAM_CHAT_ID,
         text: message,
-        parse_code: 'Markdown'    //allows llm to format with bold/italic
+        parse_mode: 'Markdown'    //allows llm to format with bold/italic
       })
 
     });
@@ -96,7 +96,7 @@ async function runChaosRoutine() {
     return;
   }
 
-  const briefing = generateCynicalBriefing(headlines);
+  const briefing = await generateCynicalBriefing(headlines);
   await sendToTelegram(`☕ *Morning Chaos Briefing*\n\n${briefing}`);
 };
 
