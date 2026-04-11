@@ -61,7 +61,7 @@ async function generateCynicalBriefing(headlines) {
 
 async function sendToTelegram(message) {
   console.log("Sending Briefing to Telegram...");
-  const url = `https://api.telegram.org/bot8669490117:AAHX62xGax8nlN4kunqRBOrQ4U81H8NuawU/getUpdates`;
+  const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getUpdates`;
 
   try {
     const response = await fetch(url, {
