@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node --env-file=.env chaos-agent.js",
+    "dev": "node --env-file=.env src/chaos-agent.js",
     "start": "node src/chaos-agent.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
