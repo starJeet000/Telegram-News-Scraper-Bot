@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node --env-file=.env src/chaos-agent.js",
-    "start": "node src/chaos-agent.js",
+    "dev": "node --env-file=.env src/index.js",
+    "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -14,6 +14,7 @@
   "type": "module",
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
-    "cheerio": "^1.2.0"
+    "cheerio": "^1.2.0",
+    "rss-parser": "^3.13.0"
   }
 }
