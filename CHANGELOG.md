@@ -37,6 +37,10 @@ All notable changes to this project will be documented in this file.
 - Refactored `brain.js` to process the two-stage hybrid pipeline (offline fact extraction followed by Gemini persona synthesis).
 - Modified `index.js` to map the offline facts and pass them effectively into the Gemini prompt.
 
+### Fixed
+
+- **Telegram Module Export Fix:** Resolved a `SyntaxError` in `src/index.js` by explicitly exporting `sendToTelegram` from `src/telegram.js` (while maintaining `broadcastNews` as an alias).
+
 ## [2.0.0] - Previous Major Release
 
 ### Changed
