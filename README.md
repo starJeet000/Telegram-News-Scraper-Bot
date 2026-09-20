@@ -1,64 +1,92 @@
-# ☕ The "Chaos Routine" Bot (@ExhaustedDwightBot) - A Telegram News Scraper Bot (Offline NLP Edition)
+# ☕ The "Chaos Routine" Bot (@ExhaustedDwightBot)
 
-An automated, serverless Telegram agent that wakes up while you are deep in a late-night coding session, randomly samples the front pages of major tech sites, and delivers a highly rigid, deterministic briefing about the state of the tech industry.
-Built entirely with offline NLP—because true developers don't rely on third-party APIs that hallucinate about JavaScript frameworks.
-
-A lightweight, 100% free Node.js bot that scrapes trending tech news, strips away ads and junk HTML, summarizes the core facts using local Natural Language Processing (NLP), and broadcasts a clean briefing to a Telegram channel.
-
-By bypassing third-party LLMs and running purely on GitHub Actions, this bot guarantees **zero API costs, zero hallucinations, and zero maintenance.**
+An automated, serverless Telegram agent that wakes up while you are deep in a late-night coding session, randomly samples top tech sites, extracts core article facts offline, and feeds them to an AI persona acting as an exhausted senior software engineer drinking his 4th cup of coffee.
+It delivers a sarcastic morning briefing roasting tech hype, useless frameworks, and corporate AI bubbles—complete with evidence links.
+By combining **offline NLP pre-processing** with **Gemini 2.5 Flash synthesis**, this bot achieves lightning-fast, high-quality briefings with zero clickbait, smart topic filtering, and robust offline fallback capabilities.
 
 ## ✨ Features
 
-- **Chaos Roulette Scraper:** Randomly selects 2 tech sources (Hacker News, GitHub Trending, Reddit, Slashdot, Ars Technica, TechCrunch) per run.
-- **Offline NLP Summarization:** Uses `compromise` to extract the most substantive sentences directly from the article body. No AI APIs required.
-- **Ad-Free Extraction:** Leverages Firefox's `@mozilla/readability` and `jsdom` to parse raw HTML and extract only the actual journalistic content.
-- **Serverless & Free:** Designed to run on a GitHub Actions Cron schedule, costing $0 in hosting fees.
+- **Chaos Roulette & Smart Tech Filter:** Randomly selects 2 sources per run (Hacker News, r/programming, TechXplore, ScienceX Nanotech, Ars Technica, TechCrunch). Includes a strict keyword filter to discard non-tech noise (biology, archaeology, wildlife).
+- **Ad-Free Clean Extraction:** Leverages `@mozilla/readability` and `jsdom` to parse raw HTML, stripping away ads, sidebars, and navigation junk.
+- **Offline NLP Pre-Processing:** Uses `compromise` to extract 3 core factual sentences per article offline before touching the AI.
+- **Exhausted Developer Persona:** Feeds extracted facts to Google Gemini 2.5 Flash to synthesize a witty, cynical, 3-4 paragraph briefing.
+- **Resilient Fallback Engine:** If the Gemini API key is missing or encounters rate limits, the bot automatically falls back to sending the raw offline NLP bullet points without crashing.
+- **Serverless & Free:** Automated via GitHub Actions cron schedule, running on a $0 budget.
 
-## 🛠 Tech Stack
+## 🛠️ Tech Stack
 
-- **Node.js** (ES6 Modules)
-- **DOM Parsing:** `jsdom`, `cheerio`
-- **Content Extraction:** `@mozilla/readability`
-- **NLP Processing:** `compromise`
+- **Runtime:** Node.js (Strict ES6 Modules)
+
+- **AI Synthesis:** `@google/generative-ai` (Gemini 2.5 Flash)
+
+- **DOM & Content Parsing:** `jsdom`, `@mozilla/readability`, `cheerio`
+
+- **Offline NLP:** `compromise`
+
 - **RSS Parsing:** `rss-parser`
 
-## 🚀 Local Development Setup
+- **Config:** `dotenv`
+
+- **Delivery:** Telegram Bot API
+
+- **Automation:** GitHub Actions (Cron Job)
+
+## 🚀 How It Works
+
+1. **The Wake-Up:** Every 6 hours (adjustable in `.github/workflows/cron.yml`), GitHub Actions spins up an Ubuntu runner.
+2. **The Chaos Roulette:** `src/index.js` selects two random tech feeds and fetches trending articles.
+3. **The Extraction & Filtering:** The scraper filters out non-tech titles, fetches raw HTML, and uses Mozilla's Readability engine to strip out web clutter.
+4. **Offline Fact Mining:** `compromise` parses the clean text and extracts the top 3 substantive sentences per article.
+5. **The Senior Engineer Roast:** Extracted facts are sent to Gemini 2.5 Flash, prompted to act like a burnt-out senior dev roasting the latest tech absurdity.
+6. **The Delivery:** The sarcastic brief and formatted evidence links are posted directly to your Telegram channel.
+7. **The Sleep:** The runner shuts down. Total cost: $0.00.
+
+## ⚙️ Setup Instructions
 
 1. **Clone the repository:**
 
-   ```bash
+   Bash
+   ```
    git clone https://github.com/yourusername/telegram-news-scraper-bot.git
    cd telegram-news-scraper-bot
-   ```
 
+   ```
 2. **Install dependencies:**
 
-   ```bash
+   Bash
+   ```
    npm install
+
    ```
+3. **Obtain API Credentials:**
+   - **Gemini API Key:** Free key from Google AI Studio.
+   - **Telegram Bot Token:** From `@BotFather` on Telegram.
+   - **Telegram Chat ID:** Send a message to `@userinfobot` on Telegram to get your ID.
+4. **Configure GitHub Repository Secrets:**
+   Go to your GitHub repo -> **Settings** -> **Secrets and variables** -> **Actions** and add:
+   - `GEMINI_API_KEY`
+   - `TELEGRAM_BOT_TOKEN`
+   - `TELEGRAM_CHAT_ID`
 
-3. **Set up environment variables:**
-   Create a `.env` file in the root directory (or export them to your terminal):
+## 🧪 Testing Locally
 
-   ```env
-   TELEGRAM_BOT_TOKEN=your_bot_token_from_botfather
-   TELEGRAM_CHAT_ID=your_target_channel_or_chat_id
-   ```
+Create a `.env` file in the root directory (ensure it is gitignored):
+Code snippet
 
-4. **Run the bot:**
-   ```bash
-   npm start
-   ```
+```
+GEMINI_API_KEY=your_gemini_api_key_here
+TELEGRAM_BOT_TOKEN=your_bot_token_here
+TELEGRAM_CHAT_ID=your_chat_id_here
 
-## ☁️ Free Deployment via GitHub Actions
+```
 
-This bot is pre-configured to run automatically every 6 hours using GitHub Actions. To set this up on your fork:
+Run the bot locally:
+Bash
 
-1. Go to your GitHub repository's **Settings**.
-2. Navigate to **Secrets and variables > Actions**.
-3. Add a **New repository secret** named `TELEGRAM_BOT_TOKEN` with your bot's token.
-4. Add another secret named `TELEGRAM_CHAT_ID` with the ID of the chat/channel you want the bot to post to.
-5. Go to the **Actions** tab in your repo, enable workflows, and you can manually trigger it clicking **Run workflow** on the "Offline News Scraper" action.
+```
+npm start
+
+```
 
 ## 📝 License
 
