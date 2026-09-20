@@ -1,30 +1,30 @@
 // src/brain.js
+import { JSDOM } from 'jsdom';
+import { Readability } from '@mozilla/readability';
+import nlp from 'compromise';
 
-import { GoogleGenerativeAI } from "@google/generative-ai";
+export function processArticleHTML(url, rawHTML) {
+  console.log(`Processing HTML for: ${url}`);
 
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-
-export async function generateCynicalBriefing(newsItems) {
-  console.log("Consulting The Exhausted Engineer...");
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-
-  // Map the items to a clean list of sources and titles
-  const headlines = newsItems.map(item => `[${item.source}] ${item.title}`).join('\n');
-
-  const prompt = `You are a highly cynical, exhausted senior software engineer drinking his 4th cup of coffee. 
-    Review these trending tech headlines from various sources and give me a sarcastic morning briefing. 
-    Roast the hype, the useless frameworks, and the corporate AI bubble.
-    Keep it to 3-4 short paragraphs.
-  
-  Headlines:
-  ${headlines}`;
+  if (!rawHTML) return "ERROR: NO_HTML_PROVIDED";
 
   try {
-    const result = await model.generateContent(prompt);
-    return result.response.text();
+    const doc = new JSDOM(rawHTML, { url });
+    const reader = new Readability(doc.window.document);
+    const article = reader.parse();
+
+    if (!article || !article.textContent) {
+      return "ERROR: READABILITY_PARSE_FAILED";
+    }
+
+    const docNLP = nlp(article.textContent);
+    const sentences = docNLP.sentences().out('array').slice(0, 3);
+
+    if (sentences.length === 0) return "ERROR: NO_SENTENCES_FOUND";
+
+    return sentences.map(s => `🔹 ${s}`).join('\n');
   } catch (error) {
-    console.error("Brain Exhausted, Time out:", error);
-    return "The AI broke down crying. No news today. You have work to do idiot.";
+    console.error("NLP Pipeline Error:", error);
+    return "ERROR: PIPELINE_CRASHED";
   }
-};
+}

@@ -1,0 +1,60 @@
+# Telegram News Scraper Bot - Tasks & Roadmap V1.0.0
+
+Here is the step-by-step summary of how you built **Dwight: The Chaos Routine Agent** from start to finish. You transformed a basic concept into a fully functional, serverless AI microservice.
+
+### Phase 1: The Initial Concept & Setup
+* **The Goal:** Create an automated bot that wakes up every morning, reads tech news, and sends a sarcastic, cynical summary to your phone so you don't have to read the hype yourself.
+* **The Stack:** Node.js for the runtime, `cheerio` for web scraping, `@google/generative-ai` (Gemini 2.5 Flash) for the "brain," and the Telegram Bot API for delivery. 
+* **The First Draft:** You started with a single monolithic file (`chaos-agent.js`) that scraped the top 10 posts from Hacker News, fed them to Gemini, and attempted to push the result to Telegram.
+
+### Phase 2: Debugging the "Silent Delivery"
+* **The Problem:** The script ran without errors and said "Message Delivered Successfully," but nothing showed up on your phone.
+* **The Fix:** We identified that the code was hitting the `/getUpdates` endpoint (checking for messages) instead of `/sendMessage` (sending a message). We also corrected the `TELEGRAM_CHAT_ID` to point to your specific user ID rather than the bot's ID, and fixed the `parse_mode` to correctly format Markdown.
+
+### Phase 3: Broadening the View & Adding Utility
+* **The Upgrade:** A summary is good, but clicking the source is better. We updated the scraper to grab the actual URLs alongside the headlines.
+* **The Formatting:** We modified the prompt and the final Telegram message construction to output a cynical AI paragraph followed by a numbered, clickable list of sources using Telegram's Markdown syntax (`[Title](URL)`).
+
+### Phase 4: The Microservice Refactor (The "Chaos Roulette")
+* **The Bottleneck:** You wanted to add 5 more sources (GitHub, Reddit, Slashdot, Ars Technica, TechCrunch). However, scraping 6 sites at once would break Telegram's character limit, dilute the AI's prompt, and trigger Cloudflare's anti-bot firewalls on certain sites.
+* **The Solution:** We implemented the **"Chaos Roulette."** Instead of scraping everything, the bot randomly selects just *two* sources each morning. 
+* **The Architecture:** To handle this complexity, we deleted the monolithic `chaos-agent.js` and split the project into a professional, 4-file microservice:
+    1.  `scrapers.js`: Handles `cheerio` (HTML), `.json` endpoints (Reddit), and `rss-parser` (to bypass firewalls for news sites). Contains the randomizer logic.
+    2.  `brain.js`: Isolates the Google Gemini API logic and the strict "exhausted developer" system prompt.
+    3.  `telegram.js`: Handles secure message formatting and delivery.
+    4.  `index.js`: The "Boss" file that imports the other modules and runs the sequence.
+
+### Phase 5: Serverless Automation
+* **The Deployment:** Instead of paying for a server to run 24/7, you utilized **GitHub Actions**.
+* **The CRON Job:** You configured `cron.yml` to spin up a free Ubuntu runner every day at exactly 02:30 UTC (08:00 AM IST). 
+* **The Security:** You safely hid your `GEMINI_API_KEY`, `TELEGRAM_BOT_TOKEN`, and `TELEGRAM_CHAT_ID` inside GitHub Secrets so the code could run securely in the cloud without exposing your credentials.
+
+### Phase 6: Branding and Portfolio Polish
+* **The Persona:** We generated a professional, custom profile image for Dwight ("Senior Agent of Intelligence") and set up a proper bot description in Telegram via the BotFather.
+* **The Documentation:** You finalized a professional `README.md` that explains the tech stack, the architecture, and how to run it locally.
+* **The Launch:** You drafted threads for LinkedIn and Twitter to showcase your work, framing it correctly as a modular, AI-driven backend service.
+
+**The Result:** You built a zero-cost, automated, AI-integrated data pipeline that successfully mimics a senior developer's personality.
+
+
+# Telegram News Scraper Bot - Tasks & Roadmap V2.0.0
+
+## Phase 1: Codebase Modernization
+- [x] Update `package.json` to include `"type": "module"` for ES6 support.
+- [x] Refactor all existing `.js` files (`brain.js`, `index.js`, `scrapers.js`, `telegram.js`) to use `import`/`export` instead of `require()`.
+- [x] Clean up `package.json` by removing any old LLM/API dependencies (e.g., Gemini or OpenAI SDKs).
+
+## Phase 2: The Offline NLP Pipeline
+- [x] Install local text processing dependencies: `npm install jsdom @mozilla/readability compromise`.
+- [x] Update `scrapers.js` to reliably fetch the raw HTML from target news websites.
+- [x] Rewrite `brain.js` to pass the raw HTML into `jsdom` and `@mozilla/readability` to extract the clean article text (stripping out ads and menus).
+- [x] Implement the `compromise` NLP library in `brain.js` to extract the first 3 core sentences and format them into bullet points.
+
+## Phase 3: Telegram Integration
+- [x] Update `telegram.js` to format the final message cleanly (Headline, Bulleted Summary, and Source Link).
+- [x] Add basic error handling so the bot skips an article rather than crashing if a website blocks the scraper.
+
+## Phase 4: Free Deployment & Automation
+- [x] Review `.github/workflows/cron.yml` to ensure the scheduling matches your desired update frequency (e.g., every 6 hours).
+- [x] Verify all necessary environment variables (like your `TELEGRAM_BOT_TOKEN` and `CHAT_ID`) are set up in GitHub Repository Secrets.
+- [x] Run a test deployment via GitHub Actions to confirm the bot runs, sends the message, and terminates successfully within the free tier limits.

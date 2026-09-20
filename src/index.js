@@ -1,31 +1,58 @@
-//src/index.js
-
-import { runChaosRoulette } from "./scrapers.js";
-import { generateCynicalBriefing } from "./brain.js";
-import { sendToTelegram } from "./telegram.js";
-
+// src/index.js
+import { runChaosRoulette, fetchRawHTML } from "./scrapers.js";
+import { processArticleHTML } from "./brain.js";
+import { broadcastNews } from "./telegram.js";
 
 async function runChaosRoutine() {
-
+  console.log("Spinning the offline Chaos Roulette...");
   const allNews = await runChaosRoulette();
 
-  //1. get random news (6 items total from 2 sources)
-
-  if (allNews.length === 0) {
-    await sendToTelegram("The internet is dead. Scrapers failed. That is a very Good News");
+  if (!allNews || allNews.length === 0) {
+    console.log("No news fetched today. Scrapers failed.");
     return;
   }
 
-  //2. Feed it to Gemini the brain
-  const briefing = await generateCynicalBriefing(allNews);
+  let successCount = 0;
 
-  //3. Format the links nicely
-  const linksSection = allNews.map((item, i) => `${i + 1}. [${item.source}] [${item.title}](${item.url})`).join('\n');
+  for (const item of allNews) {
+    // Stop after successfully broadcasting 1 article 
+    if (successCount >= 1) break;
 
-  //4. combine and send
-  const finalMessage = `☕ *Morning Chaos Briefing*\n\n${briefing}\n\n*The Evidence:*\n${linksSection}`;
+    // Skip GitHub repos because Readability cannot parse code trees accurately
+    if (item.source === 'Github') continue;
 
-  await sendToTelegram(finalMessage);
+    try {
+      const rawHTML = await fetchRawHTML(item.url);
+      if (!rawHTML) {
+        console.log(`Skipping ${item.url}: Failed to fetch HTML.`);
+        continue;
+      }
+
+      const summary = processArticleHTML(item.url, rawHTML);
+      if (summary.startsWith("ERROR")) {
+        console.log(`Skipping ${item.url}: NLP Pipeline extraction failed.`);
+        continue;
+      }
+
+      // Pass the structured object to telegram.js for formatting
+      await broadcastNews({
+        source: item.source,
+        title: item.title,
+        summary: summary,
+        url: item.url
+      });
+
+      successCount++;
+    } catch (error) {
+      // Intercept blocks or crashes and proceed to the next item
+      console.error(`Unexpected error processing ${item.url}:`, error.message);
+      continue;
+    }
+  }
+
+  if (successCount === 0) {
+    console.log("All scraped articles were blocked by the source or failed text extraction.");
+  }
 }
 
 runChaosRoutine();

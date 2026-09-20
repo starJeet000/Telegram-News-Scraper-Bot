@@ -1,7 +1,8 @@
 // src/scrapers.js
-
 import * as cheerio from 'cheerio';
 import Parser from "rss-parser";
+import { JSDOM } from 'jsdom';
+import { Readability } from '@mozilla/readability';
 
 const parser = new Parser();
 
@@ -20,7 +21,7 @@ async function scrapeHackerNews() {
     });
     return posts;
   } catch (e) { return []; }
-};
+}
 
 async function scrapeGithubTrending() {
   try {
@@ -38,11 +39,11 @@ async function scrapeGithubTrending() {
     });
     return repos;
   } catch (e) { return []; }
-};
+}
 
 async function scrapeReddit() {
   try {
-    const response = await fetch('https://www.reddit.com/r/programming/top.json?limit= 3');
+    const response = await fetch('https://www.reddit.com/r/programming/top.json?limit=3');
     const json = await response.json();
     return json.data.children.map(post => ({
       title: post.data.title,
@@ -50,7 +51,7 @@ async function scrapeReddit() {
       source: 'r/programming'
     }));
   } catch (e) { return []; }
-};
+}
 
 async function scrapeRSS(feedUrl, sourceName) {
   try {
@@ -61,9 +62,8 @@ async function scrapeRSS(feedUrl, sourceName) {
       source: sourceName
     }));
   } catch (e) { return []; }
-};
+}
 
-//core logic: pick 2 random cources
 export async function runChaosRoulette() {
   console.log("Spinning the Chaos Roulette...");
   const sources = [
@@ -75,13 +75,34 @@ export async function runChaosRoulette() {
     () => scrapeRSS('https://techcrunch.com/feed/', 'TechCrunch')
   ];
 
-  //shuffle the array and pick the first 2 randomly
   const shuffled = sources.sort(() => 0.5 - Math.random());
   const selectedScrapers = shuffled.slice(0, 2);
-
-  //execute the 2 chosen scrapers at the same time
   const results = await Promise.all(selectedScrapers.map(fn => fn()));
-
-  //flattern the array into one single list
   return results.flat();
+}
+
+// NEW: Pure offline text extraction
+export async function fetchArticleText(url) {
+  try {
+    const response = await fetch(url);
+    const html = await response.text();
+    const doc = new JSDOM(html, { url });
+    const reader = new Readability(doc.window.document);
+    const article = reader.parse();
+    return article ? article.textContent : null;
+  } catch (e) {
+    console.error(`Failed to parse article body for ${url}`);
+    return null;
+  }
+}
+
+export async function fetchRawHTML(url) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) return null;
+    return await response.text();
+  } catch (e) {
+    console.error(`Failed to fetch HTML for ${url}`);
+    return null;
+  }
 }

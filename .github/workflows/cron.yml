@@ -1,30 +1,28 @@
-name: Morning Chaos Routine
+name: Offline News Scraper
 
 on:
   schedule:
-    # Runs at 02:30 UTC every day (which translates perfectly to 08:00 AM IST)
-    - cron: "30 2 * * *"
-  workflow_dispatch: # This magical line adds a "Run workflow" button in GitHub so you can test it manually
+    - cron: "0 */6 * * *" # Runs at minute 0 past every 6th hour
+  workflow_dispatch: # Enables manual execution from the GitHub UI
 
 jobs:
-  run-bot:
+  broadcast:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20" # Ensures we have access to the native fetch API
+          node-version: "20"
+          cache: "npm"
 
       - name: Install Dependencies
-        run: npm ci # 'ci' is faster and stricter than 'install' for server environments
+        run: npm ci
 
-      - name: Wake Up Dwight
+      - name: Execute Pipeline
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: node src/index.js
+        run: npm start
