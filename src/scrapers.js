@@ -5,12 +5,37 @@ import { JSDOM } from 'jsdom';
 import { Readability } from '@mozilla/readability';
 
 const parser = new Parser({
-  // Adding a custom User-Agent to prevent firewalls from blocking the RSS fetch
-  customFields: {
-    item: ['description', 'pubDate'],
-  },
   headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' }
 });
+
+// Non-tech topics filter to prevent general science/biology bleed
+const NON_TECH_KEYWORDS = ['whale', 'dinosaur', 'fossil', 'archaeology', 'mating', 'wildlife', 'animal', 'ocean', 'species'];
+
+function isTechRelated(title) {
+  const lowerTitle = title.toLowerCase();
+  return !NON_TECH_KEYWORDS.some(keyword => lowerTitle.includes(keyword));
+}
+
+async function scrapeHackerNews() {
+  try {
+    const response = await fetch('https://news.ycombinator.com');
+    const html = await response.text();
+    const $ = cheerio.load(html);
+    const posts = [];
+
+    $('.titleline > a').each((i, el) => {
+      const title = $(el).text();
+      if (isTechRelated(title) && posts.length < 3) {
+        posts.push({
+          title,
+          url: new URL($(el).attr('href'), 'https://news.ycombinator.com').href,
+          source: 'Hacker News'
+        });
+      }
+    });
+    return posts;
+  } catch (e) { return []; }
+}
 
 async function scrapeReddit() {
   try {
@@ -27,52 +52,32 @@ async function scrapeReddit() {
 async function scrapeRSS(feedUrl, sourceName) {
   try {
     const feed = await parser.parseURL(feedUrl);
-    return feed.items.slice(0, 3).map(item => ({
-      title: item.title,
-      url: item.link,
-      source: sourceName
-    }));
-  } catch (e) { 
-    console.error(`RSS fetch failed for ${sourceName}:`, e.message);
-    return []; 
-  }
+    return feed.items
+      .filter(item => isTechRelated(item.title || ''))
+      .slice(0, 3)
+      .map(item => ({
+        title: item.title,
+        url: item.link,
+        source: sourceName
+      }));
+  } catch (e) { return []; }
 }
 
 export async function runChaosRoulette() {
-  console.log("Spinning the strictly-tech Chaos Roulette...");
-  
-  // Hacker News has been completely purged to stop general science bleed.
-  // Replaced with highly-reliable pure tech and nanotech feeds.
+  console.log("Spinning the Chaos Roulette...");
   const sources = [
+    scrapeHackerNews,
     scrapeReddit,
-    () => scrapeRSS('https://spectrum.ieee.org/feeds/feed.rss', 'IEEE Spectrum'),
-    () => scrapeRSS('https://www.sciencedaily.com/rss/matter_energy/nanotechnology.xml', 'ScienceDaily Nanotech'),
-    () => scrapeRSS('https://feeds.arstechnica.com/arstechnica/technology-lab', 'Ars Technica Tech'),
-    () => scrapeRSS('https://techcrunch.com/feed/', 'TechCrunch'),
-    () => scrapeRSS('https://www.theverge.com/tech/rss/index.xml', 'The Verge Tech')
+    () => scrapeRSS('https://techxplore.com/rss-feed/', 'TechXplore'),
+    () => scrapeRSS('https://phys.org/rss-feed/nanotech-news/', 'ScienceX Nanotech'),
+    () => scrapeRSS('https://feeds.arstechnica.com/arstechnica/technology-lab', 'Ars Technica'),
+    () => scrapeRSS('https://techcrunch.com/feed/', 'TechCrunch')
   ];
 
   const shuffled = sources.sort(() => 0.5 - Math.random());
   const selectedScrapers = shuffled.slice(0, 2);
   const results = await Promise.all(selectedScrapers.map(fn => fn()));
   return results.flat();
-}
-
-// Pure offline text extraction
-export async function fetchArticleText(url) {
-  try {
-    const response = await fetch(url, {
-      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' }
-    });
-    const html = await response.text();
-    const doc = new JSDOM(html, { url });
-    const reader = new Readability(doc.window.document);
-    const article = reader.parse();
-    return article ? article.textContent : null;
-  } catch (e) {
-    console.error(`Failed to parse article body for ${url}`);
-    return null;
-  }
 }
 
 export async function fetchRawHTML(url) {
@@ -82,8 +87,5 @@ export async function fetchRawHTML(url) {
     });
     if (!response.ok) return null;
     return await response.text();
-  } catch (e) {
-    console.error(`Failed to fetch HTML for ${url}`);
-    return null;
-  }
+  } catch (e) { return null; }
 }

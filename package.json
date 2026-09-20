@@ -1,6 +1,6 @@
 {
   "name": "telegram-news-scraper-bot",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Offline NLP Telegram News Scraper Bot",
   "type": "module",
   "scripts": {
@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "@mozilla/readability": "^0.5.0",
     "cheerio": "^1.0.0-rc.12",
     "compromise": "^14.17.0",

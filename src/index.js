@@ -1,59 +1,40 @@
 // src/index.js
 import 'dotenv/config';
 import { runChaosRoulette, fetchRawHTML } from "./scrapers.js";
-import { processArticleHTML } from "./brain.js";
-import { broadcastNews } from "./telegram.js";
+import { extractOfflineFacts, generateCynicalBriefing } from "./brain.js";
+import { sendToTelegram } from "./telegram.js";
 
 async function runChaosRoutine() {
-  console.log("Spinning the offline Chaos Roulette...");
+  console.log("Spinning the Chaos Routine...");
   const allNews = await runChaosRoulette();
 
   if (!allNews || allNews.length === 0) {
-    console.log("No news fetched today. Scrapers failed.");
+    await sendToTelegram("The internet is dead. Scrapers failed. That is very Good News.");
     return;
   }
 
-  let successCount = 0;
-
+  // Extract offline facts for each scraped article
+  const processedArticles = [];
   for (const item of allNews) {
-    // Stop after successfully broadcasting 1 article 
-    if (successCount >= 1) break;
-
-    // Skip GitHub repos because Readability cannot parse code trees accurately
-    if (item.source === 'Github') continue;
-
-    try {
-      const rawHTML = await fetchRawHTML(item.url);
-      if (!rawHTML) {
-        console.log(`Skipping ${item.url}: Failed to fetch HTML.`);
-        continue;
-      }
-
-      const summary = processArticleHTML(item.url, rawHTML);
-      if (summary.startsWith("ERROR")) {
-        console.log(`Skipping ${item.url}: NLP Pipeline extraction failed.`);
-        continue;
-      }
-
-      // Pass the structured object to telegram.js for formatting
-      await broadcastNews({
-        source: item.source,
-        title: item.title,
-        summary: summary,
-        url: item.url
-      });
-
-      successCount++;
-    } catch (error) {
-      // Intercept blocks or crashes and proceed to the next item
-      console.error(`Unexpected error processing ${item.url}:`, error.message);
-      continue;
-    }
+    const rawHTML = await fetchRawHTML(item.url);
+    const facts = extractOfflineFacts(rawHTML, item.url);
+    processedArticles.push({
+      ...item,
+      facts
+    });
   }
 
-  if (successCount === 0) {
-    console.log("All scraped articles were blocked by the source or failed text extraction.");
-  }
+  // Generate Gemini Sarcastic Briefing
+  const briefing = await generateCynicalBriefing(processedArticles);
+
+  // Format "The Evidence" links section exactly like the screenshot
+  const linksSection = processedArticles
+    .map((item, i) => `${i + 1}. ${item.source} [${item.title}](${item.url})`)
+    .join('\n');
+
+  const finalMessage = `☕ *Morning Chaos Briefing*\n\n${briefing}\n\n*The Evidence:*\n${linksSection}`;
+
+  await sendToTelegram(finalMessage);
 }
 
 runChaosRoutine();
