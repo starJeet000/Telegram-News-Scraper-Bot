@@ -1,4 +1,5 @@
 // src/index.js
+import 'dotenv/config';
 import { runChaosRoulette, fetchRawHTML } from "./scrapers.js";
 import { processArticleHTML } from "./brain.js";
 import { broadcastNews } from "./telegram.js";
