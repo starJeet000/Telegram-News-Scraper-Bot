@@ -58,3 +58,13 @@ Here is the step-by-step summary of how you built **Dwight: The Chaos Routine Ag
 - [x] Review `.github/workflows/cron.yml` to ensure the scheduling matches your desired update frequency (e.g., every 6 hours).
 - [x] Verify all necessary environment variables (like your `TELEGRAM_BOT_TOKEN` and `CHAT_ID`) are set up in GitHub Repository Secrets.
 - [x] Run a test deployment via GitHub Actions to confirm the bot runs, sends the message, and terminates successfully within the free tier limits.
+
+Phase 5: Public Web Dashboard & Static API (GitHub Pages)
+- [x] Update `src/index.js` to write structured briefing data to `public/briefing.json` on each cron run.
+- [x] Create a lightweight, responsive dark-mode `public/index.html` web dashboard to render the latest briefing and evidence links.
+- [x] Update `.github/workflows/cron.yml` to grant write permissions and add the GitHub Pages deployment action (`peaceiris/actions-gh-pages`).
+- [ ] Enable GitHub Pages in repository settings pointing to the `gh-pages` branch.
+
+Phase 6: Multi-Channel Expansion & Feeds
+- [ ] Generate an `rss.xml` feed inside `src/index.js` using the `feed` library to allow subscriptions via Feedly/NetNewsWire.
+- [ ] Add optional Webhook dispatchers for Discord or Slack to broadcast alongside Telegram.

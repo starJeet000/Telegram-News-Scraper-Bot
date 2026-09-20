@@ -2,27 +2,36 @@ name: Offline News Scraper
 
 on:
   schedule:
-    - cron: "0 */6 * * *" # Runs at minute 0 past every 6th hour
-  workflow_dispatch: # Enables manual execution from the GitHub UI
+    - cron: "30 2 * * *" # Runs daily at 02:30 UTC (8:00 AM IST)
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
-  broadcast:
+  run-scraper:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm ci
 
-      - name: Execute Pipeline
+      - name: Execute Scraper Pipeline
         env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: npm start
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public

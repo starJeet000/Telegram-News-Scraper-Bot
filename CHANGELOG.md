@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.3.0] - 2026-09-20
+
+### Added
+
+- **Public Web Dashboard:** Added `public/index.html` featuring a dark-mode, responsive web dashboard to render the latest briefing and evidence links.
+- **Static JSON API Endpoint:** Updated `src/index.js` to automatically output structured briefing data to `public/briefing.json` on every execution.
+- **GitHub Pages Automated Deployment:** Added the `peaceiris/actions-gh-pages` deployment step to `.github/workflows/cron.yml` to automatically host the web interface and static API for free on GitHub Pages.
+
+### Changed
+
+- **Cron Schedule Adjustment:** Updated the workflow schedule to run daily at `02:30 UTC` (08:00 AM IST) for a morning news delivery.
+
 ## [2.2.0] - 2026-09-20
 
 ### Added
