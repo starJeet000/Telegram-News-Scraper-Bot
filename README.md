@@ -46,18 +46,22 @@ By combining **offline NLP pre-processing** with **Gemini 2.5 Flash synthesis**,
 1. **Clone the repository:**
 
    Bash
+
    ```
    git clone https://github.com/yourusername/telegram-news-scraper-bot.git
    cd telegram-news-scraper-bot
 
    ```
+
 2. **Install dependencies:**
 
    Bash
+
    ```
    npm install
 
    ```
+
 3. **Obtain API Credentials:**
    - **Gemini API Key:** Free key from Google AI Studio.
    - **Telegram Bot Token:** From `@BotFather` on Telegram.
