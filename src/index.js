@@ -2,9 +2,11 @@
 import 'dotenv/config';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { Feed } from 'feed';
 import { runChaosRoulette, fetchRawHTML } from "./scrapers.js";
 import { extractOfflineFacts, generateCynicalBriefing } from "./brain.js";
 import { sendToTelegram } from "./telegram.js";
+import { sendToDiscord } from "./discord.js";
 
 async function runChaosRoutine() {
   console.log("Spinning the Chaos Routine...");
@@ -36,10 +38,11 @@ async function runChaosRoutine() {
 
   const finalMessage = `☕ *Morning Chaos Briefing*\n\n${briefing}\n\n*The Evidence:*\n${linksSection}`;
 
-  // Broadcast to Telegram
+  // Broadcast to all configured channels
   await sendToTelegram(finalMessage);
+  await sendToDiscord(finalMessage);
 
-  // Generate public/briefing.json for the Web Dashboard & API
+  // Web Dashboard API & RSS Generation
   const outputData = {
     updatedAt: new Date().toISOString(),
     briefing,
@@ -54,13 +57,44 @@ async function runChaosRoutine() {
   try {
     const publicDir = path.resolve(process.cwd(), 'public');
     await fs.mkdir(publicDir, { recursive: true });
+
+    // 1. Write JSON for the Web Dashboard
     await fs.writeFile(
       path.join(publicDir, 'briefing.json'),
       JSON.stringify(outputData, null, 2)
     );
     console.log("Successfully written static API to public/briefing.json");
+
+    // 2. Generate and write RSS Feed
+    const feed = new Feed({
+      title: "Exhausted Senior Engineer Briefing",
+      description: "Cynical morning tech briefings generated offline by an overworked AI.",
+      id: "https://github.com/",
+      link: "https://github.com/",
+      language: "en",
+      updated: new Date(),
+      generator: "Chaos Routine Bot",
+    });
+
+    // Format the RSS item content with basic HTML so it renders cleanly in feed readers
+    const htmlBriefing = briefing.replace(/\n/g, '<br>');
+    const htmlEvidence = processedArticles
+      .map((item, i) => `${i + 1}. <a href="${item.url}">${item.title}</a> (${item.source})`)
+      .join('<br>');
+
+    feed.addItem({
+      title: `Tech Briefing - ${new Date().toLocaleDateString()}`,
+      id: new Date().toISOString(),
+      link: "https://github.com/",
+      description: `${htmlBriefing}<br><br><b>The Evidence:</b><br>${htmlEvidence}`,
+      date: new Date()
+    });
+
+    await fs.writeFile(path.join(publicDir, 'rss.xml'), feed.rss2());
+    console.log("Successfully written RSS feed to public/rss.xml");
+
   } catch (error) {
-    console.error("Failed to write public/briefing.json:", error.message);
+    console.error("Failed to write public files:", error.message);
   }
 }
 

@@ -1,4 +1,4 @@
-name: Offline News Scraper
+name: Morning Daily Digest
 
 on:
   schedule:

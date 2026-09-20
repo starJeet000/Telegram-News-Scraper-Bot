@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.4.0] - 2026-09-20
+
+### Added
+
+- **Standardized RSS Feed Generation:** Integrated the `feed` library to automatically generate a standard `rss.xml` file inside the `public/` directory during every run, allowing subscriptions via Feedly, NetNewsWire, and other aggregators.
+- **Discord Webhook Integration:** Added `src/discord.js` to optionally broadcast the morning briefing to a Discord channel. Controlled via the `DISCORD_WEBHOOK_URL` environment variable; gracefully skips execution if unconfigured.
+
 ## [2.3.0] - 2026-09-20
 
 ### Added
