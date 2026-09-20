@@ -23,24 +23,6 @@ async function scrapeHackerNews() {
   } catch (e) { return []; }
 }
 
-async function scrapeGithubTrending() {
-  try {
-    const response = await fetch('https://github.com/trending');
-    const html = await response.text();
-    const $ = cheerio.load(html);
-    const repos = [];
-    $('.Box-row h2 a').slice(0, 3).each((i, el) => {
-      const title = $(el).text().replace(/\s+/g, ' ').trim();
-      repos.push({
-        title,
-        url: 'https://github.com' + $(el).attr('href'),
-        source: 'Github'
-      });
-    });
-    return repos;
-  } catch (e) { return []; }
-}
-
 async function scrapeReddit() {
   try {
     const response = await fetch('https://www.reddit.com/r/programming/top.json?limit=3');
@@ -65,13 +47,14 @@ async function scrapeRSS(feedUrl, sourceName) {
 }
 
 export async function runChaosRoulette() {
-  console.log("Spinning the Chaos Roulette...");
+  console.log("Spinning the strictly-tech Chaos Roulette...");
+
   const sources = [
     scrapeHackerNews,
-    scrapeGithubTrending,
     scrapeReddit,
-    () => scrapeRSS('https://slashdot.org/slashdot.xml', 'Slashdot'),
-    () => scrapeRSS('https://feeds.arstechnica.com/arstechnica/index', 'Ars Technica'),
+    () => scrapeRSS('https://techxplore.com/rss-feed/', 'TechXplore'),
+    () => scrapeRSS('https://phys.org/rss-feed/nanotech-news/', 'ScienceX Nanotech'),
+    () => scrapeRSS('https://feeds.arstechnica.com/arstechnica/technology-lab', 'Ars Technica Tech'),
     () => scrapeRSS('https://techcrunch.com/feed/', 'TechCrunch')
   ];
 
@@ -81,7 +64,7 @@ export async function runChaosRoulette() {
   return results.flat();
 }
 
-// NEW: Pure offline text extraction
+// Pure offline text extraction
 export async function fetchArticleText(url) {
   try {
     const response = await fetch(url);
