@@ -2,25 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
-## [2.0.0] - 2026-09-20
+## [2.2.0] - 2026-09-20
 
 ### Added
 
-- **Offline NLP Summarization:** Integrated `compromise` to deterministically extract the top 3 core sentences from articles, replacing unpredictable AI-generated summaries.
-- **Robust Text Extraction:** Added `@mozilla/readability` and `jsdom` to strip ads, sidebars, and junk HTML, ensuring only pure article text is processed.
-- **ES6 Module Support:** Added `"type": "module"` to `package.json` to enforce modern JavaScript standards.
-- **Graceful Error Handling:** Implemented `try...catch` blocks in the main execution loop to gracefully skip articles if the scraper is blocked (e.g., by Cloudflare 403 errors).
-- **GitHub Actions Workflow Dispatch:** Added the `workflow_dispatch` trigger to `.github/workflows/cron.yml` to allow manual testing from the GitHub UI.
+- **Massive Source Expansion:** Upgraded the scraper pool from 5 sources to 14 high-yield tech endpoints, adding Lobste.rs, Dev.to, InfoQ, BleepingComputer, Krebs on Security, TechCrunch AI, MIT Tech Review AI, ServeTheHome, and Phoronix.
+- **Subreddit Mini-Roulette:** Upgraded the Reddit scraper to dynamically cycle between `r/programming`, `r/netsec`, `r/artificial`, `r/webdev`, and `r/sysadmin` rather than statically polling a single subreddit.
 
 ### Changed
 
-- **Codebase Modernization:** Refactored all Node.js files (`index.js`, `brain.js`, `scrapers.js`, `telegram.js`) to use `import`/`export` syntax instead of legacy `require()`.
-- **Telegram Formatting:** Shifted all message formatting logic directly into `telegram.js` to separate concerns, resulting in a cleaner Markdown output with inline source links.
+- **Advanced Tech Filtering:** Completely overhauled the `isTechRelated()` offline keyword filter. Implemented a dual-layer system with an aggressive negative blocklist (e.g., politics, crime, general science) and a positive tech-term whitelist (e.g., gpu, server, api) to guarantee zero off-topic bleed.
 
-### Removed
+## [2.1.1] - 2026-09-20
 
-- **Gemini AI Dependencies:** Stripped out `@google/generative-ai` and removed all LLM-related logic to guarantee a 100% free, zero-hallucination workflow.
-- **BotFather Polling:** Removed active server requirements. The bot now runs efficiently as a scheduled one-off script.
+### Fixed
+
+- **Telegram Module Export Fix:** Resolved a `SyntaxError` in `src/index.js` by explicitly exporting `sendToTelegram` from `src/telegram.js` (while maintaining `broadcastNews` as an alias).
 
 ## [2.1.0] - 2026-09-20
 
@@ -36,10 +33,6 @@ All notable changes to this project will be documented in this file.
 - Updated `package.json` to include `@google/generative-ai` and `dotenv` dependencies.
 - Refactored `brain.js` to process the two-stage hybrid pipeline (offline fact extraction followed by Gemini persona synthesis).
 - Modified `index.js` to map the offline facts and pass them effectively into the Gemini prompt.
-
-### Fixed
-
-- **Telegram Module Export Fix:** Resolved a `SyntaxError` in `src/index.js` by explicitly exporting `sendToTelegram` from `src/telegram.js` (while maintaining `broadcastNews` as an alias).
 
 ## [2.0.0] - Previous Major Release
 
