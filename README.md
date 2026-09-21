@@ -9,8 +9,8 @@ By combining **offline NLP pre-processing** with **Gemini 2.5 Flash synthesis**,
 ## ✨ Features
 
 - **Multi-Channel Delivery:** Broadcasts the daily briefing to Telegram and an optional Discord webhook.
-- **Public Web Dashboard & API:** Automatically generates and hosts a dark-mode web dashboard (`index.html`) and a static REST API (`briefing.json`) for free via GitHub Pages.
-- **Standardized RSS Feed:** Generates an `rss.xml` file on every run, allowing subscriptions via Feedly, NetNewsWire, or other RSS aggregators.
+- **Public Web Dashboard & API:** Automatically generates a dark-mode web dashboard (`index.html`), a static REST API (`briefing.json`), and an `rss.xml` feed deployed directly to Vercel.
+- **Automated Vercel Edge Hosting:** GitHub Actions natively executes the Vercel CLI to securely push production builds to the edge network without polluting your Git branch history.
 - **Expanded Chaos Roulette:** Randomly selects 2 sources per run from a pool of 14 high-yield tech endpoints across software engineering, cybersecurity, AI, hardware, and nanotechnology.
 - **Multi-Subreddit Mini-Roulette:** Dynamically polls top posts across `r/programming`, `r/netsec`, `r/artificial`, `r/webdev`, and `r/sysadmin`.
 - **Dual-Layer Smart Filtering:** Employs an aggressive negative blocklist (e.g., politics, crime, general science) paired with a positive tech term whitelist to eliminate non-tech noise.
@@ -27,7 +27,8 @@ By combining **offline NLP pre-processing** with **Gemini 2.5 Flash synthesis**,
 - **Offline NLP:** `compromise`
 - **Feeds & RSS:** `rss-parser`, `feed`
 - **Config:** `dotenv`
-- **Delivery:** Telegram Bot API, Discord Webhooks, GitHub Pages
+- **Delivery:** Telegram Bot API, Discord Webhooks
+- **Deployment:** Vercel CLI
 - **Automation:** GitHub Actions (Cron Job)
 
 ## 🌐 Supported News Sources
@@ -47,41 +48,45 @@ By combining **offline NLP pre-processing** with **Gemini 2.5 Flash synthesis**,
 5. **The Senior Engineer Roast:** Extracted facts are sent to Gemini 2.5 Flash, prompted to act like a burnt-out senior dev roasting the latest tech absurdity.
 6. **The Delivery:** The sarcastic brief and formatted evidence links are posted directly to your Telegram channel and Discord webhook.
 7. **The Static Generation:** A `public/` directory is built containing `index.html` (dashboard), `briefing.json` (API), and `rss.xml` (RSS feed).
-8. **The Deployment:** GitHub Actions automatically deploys the `public/` folder to GitHub Pages. Total cost: $0.00.
+8. **The Deployment:** GitHub Actions uses the Vercel CLI to authenticate and securely push the `public/` folder to Vercel's edge network. Total cost: $0.00.
 
 ## ⚙️ Setup Instructions
 
 1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/yourusername/telegram-news-scraper-bot.git](https://github.com/yourusername/telegram-news-scraper-bot.git)
-   cd telegram-news-scraper-bot
 
-````
+   ```bash
+   git clone https://github.com/starJeet000/telegram-news-scraper-bot.git
+   cd telegram-news-scraper-bot
+   ```
 
 2. **Install dependencies:**
 
    Bash
-   ```
-   npm install
 
    ```
-3. **Obtain API Credentials:**
+   npm install
+   ```
+
+3. **Obtain API Credentials & Identifiers:**
    - **Gemini API Key:** Free key from Google AI Studio.
    - **Telegram Bot Token:** From `@BotFather` on Telegram.
    - **Telegram Chat ID:** Send a message to `@userinfobot` on Telegram to get your ID.
    - **Discord Webhook URL (Optional):** Create a webhook in your Discord server settings.
+   - **Vercel Settings:** Execute `npx vercel` locally or check your Vercel Dashboard to generate a Personal Access Token (`VERCEL_TOKEN`), your Team/Account ID (`VERCEL_ORG_ID`), and your Project ID (`VERCEL_PROJECT_ID`). Ensure your Vercel project's Output Directory is explicitly set to `public`.
 4. **Configure GitHub Repository Secrets:**
    Go to your GitHub repo -> **Settings** -> **Secrets and variables** -> **Actions** and add:
    - `GEMINI_API_KEY`
    - `TELEGRAM_BOT_TOKEN`
    - `TELEGRAM_CHAT_ID`
    - `DISCORD_WEBHOOK_URL` (Optional)
-5. **Enable GitHub Pages:**
-   Go to your GitHub repo -> **Settings** -> **Pages**. Set the **Source** to deploy from a branch, select `gh-pages`, and choose the `/ (root)` folder.
+   - `VERCEL_TOKEN`
+   - `VERCEL_ORG_ID`
+   - `VERCEL_PROJECT_ID`
 
 ## 🧪 Testing Locally
 
 Create a `.env` file in the root directory (ensure it is gitignored):
+
 Code snippet
 
 ```
@@ -89,15 +94,14 @@ GEMINI_API_KEY=your_gemini_api_key_here
 TELEGRAM_BOT_TOKEN=your_bot_token_here
 TELEGRAM_CHAT_ID=your_chat_id_here
 DISCORD_WEBHOOK_URL=your_discord_webhook_url_here
-
 ```
 
-Run the bot locally:
+Run the bot locally to generate the files and test APIs:
+
 Bash
 
 ```
 npm start
-
 ```
 
 ## 📝 License

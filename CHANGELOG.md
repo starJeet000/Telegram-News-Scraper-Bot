@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.5.0] - 2026-09-21
+
+### Added
+
+- **Automated Vercel Deployment:** Integrated the Vercel CLI (`vercel@latest`) into `.github/workflows/cron.yml` to automatically push the `public/` directory to Vercel's edge network on every scheduled run.
+- **Vercel Authentication Secrets:** Added GitHub Actions workflow support for `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID` repository secrets to securely authorize headless deployments.
+
+### Removed
+
+- **GitHub Pages Infrastructure:** Completely removed the `peaceiris/actions-gh-pages` deployment step and artifact routing to eliminate `gh-pages` branch clutter and configuration friction.
+
 ## [2.4.0] - 2026-09-20
 
 ### Added
