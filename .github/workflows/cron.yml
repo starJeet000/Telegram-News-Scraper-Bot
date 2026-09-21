@@ -1,28 +1,13 @@
-name: Offline News Scraper
+name: Morning Daily Digest
 
 on:
   schedule:
     - cron: "30 2 * * *" # Runs daily at 02:30 UTC (8:00 AM IST)
   workflow_dispatch:
 
-# Grant permissions needed for native Pages deployment
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Prevent concurrent deployments
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
-  run-scraper-and-deploy:
+  run-scraper:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -42,15 +27,3 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: npm start
-
-      - name: Setup GitHub Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: "./public" # Uploads only the generated dashboard files
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
