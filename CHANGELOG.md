@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.6.0] - 2026-09-23
+
+### Added
+
+- **Native Branch Deployment:** Pivoted to a zero-token deployment strategy. GitHub Actions now automatically commits and pushes the generated `public/` directory to an isolated `live-dashboard` branch.
+- **Git History Protection:** Isolated all automated bot commits to the `live-dashboard` branch to prevent daily updates from flooding the `main` branch commit history.
+- **Vercel Git Integration:** Vercel now securely builds and deploys the dashboard by natively watching the `live-dashboard` branch, completely bypassing manual CLI authentication.
+
+### Removed
+
+- **Vercel CLI Integration:** Completely stripped `vercel@latest` installation and deployment steps from the GitHub Actions workflow to resolve headless environment authentication errors.
+- **Deployment Secrets:** Removed the requirement for `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID` repository secrets.
+
 ## [2.5.0] - 2026-09-21
 
 ### Added
