@@ -5,8 +5,12 @@ on:
     - cron: "30 2 * * *" # Runs daily at 02:30 UTC (8:00 AM IST)
   workflow_dispatch:
 
+# Grant permission for the bot to push commits
+permissions:
+  contents: write
+
 jobs:
-  run-scraper-and-deploy:
+  run-scraper-and-publish:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -27,11 +31,12 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: npm start
 
-      - name: Install Vercel CLI
-        run: npm install --global vercel@latest
-
-      - name: Force Deploy to Vercel Production
-        env:
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-        run: vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Push to Live Dashboard Branch
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -B live-dashboard
+          # Force add public folder since it is in our .gitignore
+          git add public/ -f
+          git commit -m "chore: automated daily dashboard update" || echo "No changes to commit"
+          git push origin live-dashboard --force
