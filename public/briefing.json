@@ -1,0 +1,42 @@
+{
+  "updatedAt": "2026-09-26T07:54:37.410Z",
+  "briefing": "Right, another morning, another dose of AI-induced existential dread. Apparently, our brilliant AI models are such accomplished liars that we now need \"layered workflows\" and, get this, *human review* to fact-check their digital hallucinations. So, we've successfully created a system that generates plausible fiction, and the pinnacle of its utility so far is a subscription-based scam platform that weaponized an AI chatbot to compromise 12,000 accounts. Real innovative, folks. We’re building the future, one confidently incorrect statement and automated scam at a time.\n\nThen there's the rock-solid foundation of the internet: Google ads, now delivering sophisticated tech support scams that freeze your screens. Because what's a little widespread fraud when you have ad revenue targets to hit? And just to make your day, some brilliant researchers found a *faster* way to break RSA encryption – *by hand*, no less, explicitly calling out they didn't even need AI or GPUs. So, our digital trust relies on platforms that actively help scammers and encryption that's getting easier to crack with less effort. Feeling secure yet? I sure am.\n\nAnd the enterprise market continues its relentless march towards... sameness. Four different \"edge security\" vendors, all competing for the exact same spot, because apparently, variety is the spice of repackaging the same damn thing. Over in Android land, we've apparently reinvented dependency management with the groundbreaking concept of a \"Bill of Materials.\" So, instead of expecting our libraries to just *work* together, we now have a fancy acronym to signify that, occasionally, they might. Truly inspiring. Pass the fifth cup.",
+  "evidence": [
+    {
+      "source": "Dev.to",
+      "title": "Hallucination detection: why standalone tools fail",
+      "url": "https://dev.to/iamvera/hallucination-detection-why-standalone-tools-fail-2bni",
+      "facts": "• No single method is universally reliable; long AI answers need layered verification combining source and coherence checks.Image: IamVera.ai — original editorial illustration\n• Hallucination detection automatically flags that AI output is factually incorrect or not supported by the supplied context.\n• Recent studies show that no single method works universally; treat detection as a layered workflow that combines source checking, knowledge graphs, model behaviour and internal signals with human review."
+    },
+    {
+      "source": "Dev.to",
+      "title": "Juniper, Sophos, WatchGuard and Barracuda: reading four edge vendors together",
+      "url": "https://dev.to/onaeiuspkz/juniper-sophos-watchguard-and-barracuda-reading-four-edge-vendors-together-3kjg",
+      "facts": "• Juniper, Sophos, WatchGuard and Barracuda: reading four edge vendors together\n• Edge security appliances from different vendors compete for the same buyers and occupy the same position in a network, which makes them worth measuring as a group.\n• ZoomEye returns four totals that span an order of magnitude, and the spread is more informative than any single figure."
+    },
+    {
+      "source": "Dev.to",
+      "title": "How to Create a BOM (Bill of Materials) for Your Android Libraries",
+      "url": "https://dev.to/_anubhav/how-to-create-a-bom-bill-of-materials-for-your-android-libraries-2n7l",
+      "facts": "• As Android developers, we use BOMs every day.\n• Every time you add platform(libs.firebase.bom) or platform(libs.compose.bom) to your build.gradle.kts, you're importing one.\n• A BOM lets you drop a single version into your build file and get a set of libraries that are guaranteed to work together."
+    },
+    {
+      "source": "Ars Technica Tech",
+      "title": "Your uncle’s frozen Mac says it’s infected after viewing a Google ad. Now what?",
+      "url": "https://arstechnica.com/security/2026/09/google-ads-caught-delivering-convincing-scareware-ads-to-unsuspecting-users/",
+      "facts": "• Researchers say they recently found Google ads delivering a sophisticated tech support scam that freezes the screens of both Windows and Mac devices and displays messages urgently instructing them to phone a bogus call center.\n• The ads were displayed all over the web, including on high-traffic maps, weather, real-estate, document-hosting, and sports sites.\n• Users who called the number were then urged to pay hefty fees, grant remote access to their devices, or divulge personal information."
+    },
+    {
+      "source": "Ars Technica Tech",
+      "title": "There's a new way to break RSA that's faster than anything we've seen before",
+      "url": "https://arstechnica.com/security/2026/09/theres-a-new-way-to-break-rsa-thats-faster-than-anything-weve-seen-before/",
+      "facts": "• The forgery attack drops these levels to 265, 290, and 2119 for 1024-, 2048-, and 4096-bit keys respectively.\n• These levels may further drop because Heninger’s team did all the coding by hand and used no AI or GPUs in performing the forgeries.\n• The researcher said these tools will “almost certainly” drop the security levels further."
+    },
+    {
+      "source": "Ars Technica Tech",
+      "title": "Microsoft disrupts AI-assisted platform that compromised 12,000 accounts",
+      "url": "https://arstechnica.com/security/2026/09/microsoft-disrupts-ai-assisted-platform-that-compromised-12000/",
+      "facts": "• Microsoft said Tuesday that it led an industry-wide disruption of a subscription-based scam platform that used an AI chatbot to compromise 12,000 Microsoft accounts over a few-month span.\n• Named EvilTokens, the platform was introduced over a Telegram channel in February and charged an initial $1,500 fee and a recurring $500 charge each month after that.\n• EvilTokens provided a single service for streamlining most steps required to compromise email accounts in large numbers."
+    }
+  ]
+}
