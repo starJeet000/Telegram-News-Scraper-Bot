@@ -1,0 +1,42 @@
+{
+  "updatedAt": "2026-10-03T08:23:46.515Z",
+  "briefing": "Alright, another Monday, another pile of code that technically works but fundamentally fails. Turns out your \"structurally perfect\" 402 payment scheme is actually unpayable because the critical signature detail lives somewhere else, and the SDK just… ignores it. Peak engineering, everyone. Meanwhile, businesses are still being told to \"just switch on\" B2B payment features that literally don't exist on any major platform. But don't worry, we're making progress. We've officially discovered that \"storage design *is* security design,\" thanks to a CVE number so long it probably needs its own framework.\n\nSpeaking of frameworks, get ready for Zig, the 7,000th \"general-purpose programming language and toolchain for maintaining robust, optimal, and reusable software.\" Because clearly, the other 6,999 didn't quite hit the mark. Just as you master that, you can look forward to getting targeted with arbitrary code execution via a git post-checkout hook. Yes, cloning a repo is now a supply chain attack vector. Fun.\n\nHonestly, the most sensible thing I saw all week was an actual RFC 1149 packet, carried by a carrier pigeon, being auctioned off. At least *that* system was documented, tangible, and delivered something. Maybe we should just go back to birds. They're probably more reliable than our current payment processors and definitely less prone to silent failures. Now, who needs more coffee?",
+  "evidence": [
+    {
+      "source": "Dev.to",
+      "title": "A 402 Can Be Structurally Perfect and Still Unpayable",
+      "url": "https://dev.to/minia2a/a-402-can-be-structurally-perfect-and-still-unpayable-1plb",
+      "facts": "• If you are a buyer, you inspect the 402 before you pay it: the scheme is exact, the network is the chain you hold, the amount is what the listing said, the payTo is an address somebody set up.\n• All four can be right and the challenge still be unpayable — because none of those four is what your client actually signs against.\n• That lives in a fifth place, and the official SDK reads it with a default that never raises."
+    },
+    {
+      "source": "Dev.to",
+      "title": "Choosing Between rsync and btrfs receive in LXD: Exposure Differences Under CVE-2026-87799",
+      "url": "https://dev.to/stark_zhuang_df5076f35c68/choosing-between-rsync-and-btrfs-receive-in-lxd-exposure-differences-under-cve-2026-87799-37b6",
+      "facts": "• Choosing Between rsync and btrfs receive in LXD: Exposure Differences Under CVE-2026-87799\n• Storage design is security design\n• Two LXD operators can run the same release, apply the same patch cadence, and carry different risk from CVE-2026-87799."
+    },
+    {
+      "source": "Dev.to",
+      "title": "SEPA Direct Debit Core vs B2B: Developer Guide",
+      "url": "https://dev.to/tomwangcn/sepa-direct-debit-core-vs-b2b-developer-guide-1fod",
+      "facts": "• Stripe, Adyen and GoCardless all support SEPA Direct Debit, but none of them will collect under the B2B scheme, and Mollie doesn't document it either.\n• That matters more than it sounds.\n• B2B is the version where the payer cannot claw the money back, and if you sell to businesses you have probably been told it exists, that it is safer, and that you should \"just switch it on\"."
+    },
+    {
+      "source": "Lobste.rs",
+      "title": "I got targeted: Trying to get your credentials via a git post-checkout hook",
+      "url": "https://frankwiles.com/posts/i-got-targeted/",
+      "facts": "• TL;DR Someone targeted me in an attempt to run arbitrary code on my laptop.\n• I suspect in an attempt to gain access to my Github account and/or other\n• REVSYS client related access since I have a"
+    },
+    {
+      "source": "Lobste.rs",
+      "title": "Zig 0.17.0 Release Notes",
+      "url": "https://ziglang.org/download/0.17.0/release-notes.html",
+      "facts": "• Download & Documentation\n• Zig is a general-purpose programming language and toolchain for maintaining\n• robust, optimal, and reusable software."
+    },
+    {
+      "source": "Lobste.rs",
+      "title": "Actual RFC1149 packet being auctioned",
+      "url": "https://onlineonly.christies.com/s/fine-printed-books-manuscripts-science/carrier-pigeon-internet-protocol-150/325216",
+      "facts": "• [WAITZMAN, David and the BERGEN LINUX USER GROUP.] One printed IP/ICMP \"ping\" packet sent by carrier pigeon per RFC 1149.Small scroll of paper, 41 x 210 mm. Rolling creases visible from when attached to pigeon's leg.\n• Framed.\n• Inscribed and signed on the verso of backing board: \"Property of David Waitzman\"."
+    }
+  ]
+}
