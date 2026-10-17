@@ -1,0 +1,42 @@
+{
+  "updatedAt": "2026-10-17T07:06:02.426Z",
+  "briefing": "Alright, another Monday. Or Tuesday. Who cares, it’s just another rotation around the sun for the same old garbage. Here's your daily dose of corporate tech diarrhea, hold the enthusiasm.\n\nNvidia’s CEO, Jensen Huang, is out here declaring that *every* company will eventually be an \"AI company.\" Because apparently, existing companies like, say, a sewage treatment plant, just aren't \"futuristic\" enough without slapping a large language model on their sludge processing. Brace yourselves, folks, more consultants are coming to tell you your perfectly functional excel sheet needs to run on a proprietary AI framework because reasons. Anything to sell more GPUs, I guess.\n\nSpeaking of things perpetually broken, Microsoft just dropped a record-breaking 1,400 security patches this month. Not 14, not 140, but a thousand four hundred, which frankly sounds less like \"fixing flaws\" and more like \"patching the Titanic with duct tape while it's actively sinking.\" Meanwhile, the FBI’s arresting executives from \"cybersecurity\" firms for *assisting* hackers who *stole data from the FBI*. And then there's Cryptomus, the totally legitimate crypto platform, being sanctioned for laundering money for Russian cybercriminals. Honestly, at this point, cybersecurity is just a giant self-licking ice cream cone for the bad guys and the \"good\" guys who enable them.\n\nOn the greenwashing front, our aviation overlords have developed \"transition strategies\" for decarbonization that, shocking absolutely no one, don't actually go far enough. Just more roadmaps and vague promises while the planet boils. But hey, some actual scientists managed to upcycle battery waste into materials that *double* cell life. A genuine breakthrough that will probably be ignored by every major corporation because it doesn't involve selling vaporware or a new subscription model for your airline seat. Now, if you'll excuse me, this coffee isn't drinking itself.",
+  "evidence": [
+    {
+      "source": "TechXplore",
+      "title": "AI is coming for every company, Nvidia boss says",
+      "url": "https://techxplore.com/news/2026-10-ai-company-nvidia-boss.html",
+      "facts": "• Jensen Huang with Jenny Nordlow, chief executive of Sweden's Sferical AI, in Stockholm on Thursday.\n• Artificial intelligence will ultimately become a key aspect of all companies, the head of AI chip giant Nvidia said during a visit to Stockholm, where he urged Europe to ramp up its AI industry.\n• \"Every single company will be an AI company eventually. Every single industry will be impacted by AI,\" Jensen Huang told an event late Thursday, part of a European tour that includes an Nvidia-hosted conference in Berlin next week."
+    },
+    {
+      "source": "TechXplore",
+      "title": "Upcycled battery materials roughly double cell cycle life in tests",
+      "url": "https://techxplore.com/news/2026-10-upcycled-battery-materials-roughly-cell.html",
+      "facts": "• Credit: Worcester Polytechnic Institute\n• A new recycling approach developed by Worcester Polytechnic Institute (WPI) researchers could help make battery waste a valuable source of high-performance materials.\n• In a study published in Advanced Energy Materials, a team led by professor Yan Wang, the William B. Smith Professor of Mechanical and Materials Engineering, converted mixed battery waste into upcycled materials for both the cathode and anode and found that the resulting pouch cells outlasted cells made with commercial counterparts."
+    },
+    {
+      "source": "TechXplore",
+      "title": "Decarbonization in civil aviation: Transition strategies still don't go far enough",
+      "url": "https://techxplore.com/news/2026-10-decarbonization-civil-aviation-transition-strategies.html",
+      "facts": "• Credit: Unsplash/CC0 Public Domain\n• As the effects of climate change and the associated risks are increasingly being felt, several organizations have developed roadmaps that outline potential steps toward carbon neutrality in the aviation sector.\n• These strategies include multiple levers, such as developing alternative fuels and introducing more efficient aircraft, and are supported by the International Civil Aviation Organization (ICAO), the Air Transport Action Group (ATAG) and the European Commission, among others."
+    },
+    {
+      "source": "Krebs on Security",
+      "title": "U.K. Sanctions Cryptomus for RU Money Laundering",
+      "url": "https://krebsonsecurity.com/2026/10/u-k-sanctions-cryptomus-for-ru-money-laundering/",
+      "facts": "• The United Kingdom has issued economic sanctions against Cryptomus, a chameleonic cryptocurrency platform that experts say serves as a major conduit for payments related to ransomware, narcotics, darknet markets, fraud and cybercrime services that are helping Russia circumvent existing financial restrictions.\n• Heleket’s support agent on Telegram claims, despite all evidence to the contrary, that it is not affiliated with Cryptomus.\n• Image: Richard Sanders."
+    },
+    {
+      "source": "Krebs on Security",
+      "title": "Microsoft Patches More Than 1,400 Security Flaws",
+      "url": "https://krebsonsecurity.com/2026/10/microsoft-patches-more-than-1400-security-flaws/",
+      "facts": "• Microsoft today issued updates to fix more than 1,400 security vulnerabilities in its Windows operating systems and other software.\n• Today’s epic patch batch dwarfs September’s record of nearly 1,000 fixes, which was already about ten times the normal monthly patch load from Redmond.\n• Just one of the weaknesses patched this week is considered a “zero day,” or already exploited in the wild."
+    },
+    {
+      "source": "Krebs on Security",
+      "title": "FBI Arrests Executive at Ransomware Negotiation Firm",
+      "url": "https://krebsonsecurity.com/2026/10/fbi-arrests-founder-of-ransomware-negotiation-firm/",
+      "facts": "• Agents with the Federal Bureau of Investigation (FBI) on Thursday arrested an executive at a Canadian cybersecurity firm in connection with an investigation into the ShinyHunters hacking group that recently relieved the FBI of sensitive data on thousands of agents, multiple sources tell KrebsOnSecurity.\n• The New York Times reported today that the FBI has arrested a Canadian man in Pennsylvania on suspicion of assisting ShinyHunters.\n• The Times story did not identify the man, nor did a statement on Twitter/X about the arrest from FBI Director Kash Patel."
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Exhausted Senior Engineer Briefing</title>
+        <link>https://github.com/</link>
+        <description>Cynical morning tech briefings generated offline by an overworked AI.</description>
+        <lastBuildDate>Sat, 17 Oct 2026 07:06:02 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>Chaos Routine Bot</generator>
+        <language>en</language>
+        <item>
+            <title><![CDATA[Tech Briefing - 10/17/2026]]></title>
+            <link>https://github.com/</link>
+            <guid isPermaLink="false">2026-10-17T07:06:02.731Z</guid>
+            <pubDate>Sat, 17 Oct 2026 07:06:02 GMT</pubDate>
+            <description><![CDATA[Alright, another Monday. Or Tuesday. Who cares, it’s just another rotation around the sun for the same old garbage. Here's your daily dose of corporate tech diarrhea, hold the enthusiasm.<br><br>Nvidia’s CEO, Jensen Huang, is out here declaring that *every* company will eventually be an "AI company." Because apparently, existing companies like, say, a sewage treatment plant, just aren't "futuristic" enough without slapping a large language model on their sludge processing. Brace yourselves, folks, more consultants are coming to tell you your perfectly functional excel sheet needs to run on a proprietary AI framework because reasons. Anything to sell more GPUs, I guess.<br><br>Speaking of things perpetually broken, Microsoft just dropped a record-breaking 1,400 security patches this month. Not 14, not 140, but a thousand four hundred, which frankly sounds less like "fixing flaws" and more like "patching the Titanic with duct tape while it's actively sinking." Meanwhile, the FBI’s arresting executives from "cybersecurity" firms for *assisting* hackers who *stole data from the FBI*. And then there's Cryptomus, the totally legitimate crypto platform, being sanctioned for laundering money for Russian cybercriminals. Honestly, at this point, cybersecurity is just a giant self-licking ice cream cone for the bad guys and the "good" guys who enable them.<br><br>On the greenwashing front, our aviation overlords have developed "transition strategies" for decarbonization that, shocking absolutely no one, don't actually go far enough. Just more roadmaps and vague promises while the planet boils. But hey, some actual scientists managed to upcycle battery waste into materials that *double* cell life. A genuine breakthrough that will probably be ignored by every major corporation because it doesn't involve selling vaporware or a new subscription model for your airline seat. Now, if you'll excuse me, this coffee isn't drinking itself.<br><br><b>The Evidence:</b><br>1. <a href="https://techxplore.com/news/2026-10-ai-company-nvidia-boss.html">AI is coming for every company, Nvidia boss says</a> (TechXplore)<br>2. <a href="https://techxplore.com/news/2026-10-upcycled-battery-materials-roughly-cell.html">Upcycled battery materials roughly double cell cycle life in tests</a> (TechXplore)<br>3. <a href="https://techxplore.com/news/2026-10-decarbonization-civil-aviation-transition-strategies.html">Decarbonization in civil aviation: Transition strategies still don't go far enough</a> (TechXplore)<br>4. <a href="https://krebsonsecurity.com/2026/10/u-k-sanctions-cryptomus-for-ru-money-laundering/">U.K. Sanctions Cryptomus for RU Money Laundering</a> (Krebs on Security)<br>5. <a href="https://krebsonsecurity.com/2026/10/microsoft-patches-more-than-1400-security-flaws/">Microsoft Patches More Than 1,400 Security Flaws</a> (Krebs on Security)<br>6. <a href="https://krebsonsecurity.com/2026/10/fbi-arrests-founder-of-ransomware-negotiation-firm/">FBI Arrests Executive at Ransomware Negotiation Firm</a> (Krebs on Security)]]></description>
+        </item>
+    </channel>
+</rss>
