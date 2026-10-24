@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Exhausted Senior Engineer Briefing</title>
+        <link>https://github.com/</link>
+        <description>Cynical morning tech briefings generated offline by an overworked AI.</description>
+        <lastBuildDate>Sat, 24 Oct 2026 07:29:56 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>Chaos Routine Bot</generator>
+        <language>en</language>
+        <item>
+            <title><![CDATA[Tech Briefing - 10/24/2026]]></title>
+            <link>https://github.com/</link>
+            <guid isPermaLink="false">2026-10-24T07:29:56.893Z</guid>
+            <pubDate>Sat, 24 Oct 2026 07:29:56 GMT</pubDate>
+            <description><![CDATA[Another week, another visionary decided to build their *own* personal AI assistant that runs locally and knows how *they* talk. Because the world truly needed AI fine-tuned on someone's internal monologue. Meanwhile, the enterprise side is still pushing the fantasy that AI will somehow rewrite our colossal fuck-ups into Rust and magically make things faster. Spoiler alert: bad design isn't a language problem, it's a 'we hired the cheapest engineers' problem. Some things are just fundamentally slow because they're stupid.<br><br>And speaking of basic things being absurdly complex, we've got fresh tutorials on building a 'reusable' contact form in React, complete with validation. Because apparently, `<form>` tags are too primitive now. All that effort, just for it to inevitably choke on a HEIC file from an iPhone, because of course it will. We're still fighting image format wars from 2005 while reinventing the most basic web components with enough layers to rival an onion.<br><br>Finally, for the old guard, the C die-hards are still out there insisting undefined behavior is totally fine, because 'we know what the code will do.' Yeah, just like those geniuses who apparently thought `return 4;` was perfectly random for a security-critical system. It’s truly incredible how many different ways we manage to trip over the same few bugs, year after year, all while calling it 'innovation.' Pass the coffee.<br><br><b>The Evidence:</b><br>1. <a href="https://dev.to/vivek09thakur/i-built-a-local-ai-assistant-fine-tuned-on-my-own-conversations-4483">I built a local AI assistant fine-tuned on my own conversations</a> (Dev.to)<br>2. <a href="https://dev.to/ethan_carter/why-your-image-upload-works-with-jpg-but-fails-with-heic-21p3">Why Your Image Upload Works With JPG but Fails With HEIC</a> (Dev.to)<br>3. <a href="https://dev.to/vibebycode/build-a-reusable-contact-form-in-react-with-validation-2a7l">Build a Reusable Contact Form in React with Validation</a> (Dev.to)<br>4. <a href="https://blog.habets.se/2026/10/Attention-people-who-think-UB-is-fine.html">Attention people who think UB is fine</a> (Lobste.rs)<br>5. <a href="https://ochagavia.nl/blog/the-glorious-@xkcdrandom-zig-builtin/">The glorious @xkcdRandom Zig builtin</a> (Lobste.rs)<br>6. <a href="https://www.seangoedecke.com/software-is-slow-because-of-bad-design-not-slow-languages/">Software is slow because of bad design, not slow languages</a> (Lobste.rs)]]></description>
+        </item>
+    </channel>
+</rss>
