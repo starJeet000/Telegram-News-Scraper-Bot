@@ -1,0 +1,42 @@
+{
+  "updatedAt": "2026-10-31T08:37:53.393Z",
+  "briefing": "Alright, strap in, because today's news is a masterpiece of corporate incompetence and AI-fueled delirium. First off, congrats to roughly 70% of the internet: your PHP-powered website is probably a giant '404-LOL' today. Apparently, critical vulnerabilities that allow total server takeover are still a thing in 2024, and yes, they're already being actively exploited. Who knew that relying on code older than most of our interns was a bad idea? Truly shocking.\n\nThen there's the heartwarming tale of the ransomware negotiator who apparently moonlighted as an actual ransomware operator. Turns out if you pay someone to help you deal with cybercriminals, they might just be *themselves* part of the gang. It's like hiring a bodyguard only to find out he's the guy who mugged you. And naturally, all this delightful criminal enterprise is funneled through 'chameleonic cryptocurrency platforms' – because nothing says 'legitimate financial innovation' like being sanctioned for laundering money for Russian cybercrime. We're truly living in the future, where even the solutions are part of the problem.\n\nBut don't despair, because AI is here to save us! Nvidia's ready to cosign *billions* for a single Anthropic data center, valued at a cool $44.6 billion for *one building*. Forget housing affordability, the real estate boom is in giant server farms for chatbots nobody asked for. Meanwhile, 'privacy-focused AI assistant' Ollie, which sounds like an oxymoron wrapped in a bad startup pitch, is shutting down. Shocking. Who knew people didn't need another opaque black box that *promised* privacy? And just to balance the books, Intel decided to crash its stock by 28%, wiping $12 billion off the government's stake. Because why just miss expectations when you can fail spectacularly and make taxpayers poorer? Another glorious day in tech, folks. Now, where's that fifth cup?",
+  "evidence": [
+    {
+      "source": "Krebs on Security",
+      "title": "Widespread PHP Flaw May Cause Many Site Outages Today",
+      "url": "https://krebsonsecurity.com/2026/10/widespread-php-flaw-may-cause-many-site-outages-today/",
+      "facts": "• Expect to see quite a few websites serving error pages today: Nearly 70 percent of websites need to update their core software to fix a pair of vulnerabilities that allow an attacker to seize full control over affected servers.\n• Experts say there are working exploits for the flaws, and that these critical bugs are already being exploited in the wild.\n• Image: Shutterstock.com, Sashkin."
+    },
+    {
+      "source": "Krebs on Security",
+      "title": "Feds Suspect Ransom Negotiator Ran ShinyHunters Extortion Site",
+      "url": "https://krebsonsecurity.com/2026/10/feds-suspect-ransom-negotiator-ran-shinyhunters-extortion-site/",
+      "facts": "• U.S. federal investigators pursuing the ShinyHunters hacking group that recently stole highly sensitive data from the FBI have identified executives at two different ransomware negotiation firms who maintained unusually close relations with the extortion group, KrebsOnSecurity has learned.\n• Sources close to the investigation say one of the executives in the United States even helped ShinyHunters operate a website that pressured victims into paying a ransom.\n• Hackers aligned with ShinyHunters have claimed credit for dozens of major data breaches since 2019, when the group was primarily operated by cybercriminals living in France."
+    },
+    {
+      "source": "Krebs on Security",
+      "title": "U.K. Sanctions Cryptomus for RU Money Laundering",
+      "url": "https://krebsonsecurity.com/2026/10/u-k-sanctions-cryptomus-for-ru-money-laundering/",
+      "facts": "• The United Kingdom has issued economic sanctions against Cryptomus, a chameleonic cryptocurrency platform that experts say serves as a major conduit for payments related to ransomware, narcotics, darknet markets, fraud and cybercrime services that are helping Russia circumvent existing financial restrictions.\n• Heleket’s support agent on Telegram claims, despite all evidence to the contrary, that it is not affiliated with Cryptomus.\n• Image: Richard Sanders."
+    },
+    {
+      "source": "TechCrunch AI",
+      "title": "Nvidia weighs playing the cosigner for Nscale’s AI data center in West Virginia",
+      "url": "https://techcrunch.com/2026/10/30/nvidia-weighs-playing-the-cosigner-for-nscales-ai-data-center-in-west-virginia/",
+      "facts": "• Nvidia is in talks to guarantee billions in debt financing for AI cloud provider Nscale’s planned Anthropic data center in West Virginia, The Information reported Thursday.\n• Bloomberg later corroborated the report.\n• Anthropic has signed a $44.6 billion contract for the project’s first building alone, according to Nscale’s IPO filing."
+    },
+    {
+      "source": "TechCrunch AI",
+      "title": "Ollie, a privacy-focused AI assistant, is shutting down",
+      "url": "https://techcrunch.com/2026/10/30/ollie-a-privacy-focused-ai-assistant-is-shutting-down/",
+      "facts": "• Ollie, a startup whose mission was to deliver an AI assistant that respected its users’ privacy, says that it will be shutting down in a week.\n• Bill Lennon, the company’s co-founder and CEO, took to X on Friday to deliver the news, noting that the app will officially shut down on November 6.\n• “I’m really proud of what we accomplished,” Lennon said."
+    },
+    {
+      "source": "TechCrunch AI",
+      "title": "Intel’s stock crashes, knocking $12B from government’s stake",
+      "url": "https://techcrunch.com/2026/10/30/intels-stock-crashes-knocking-12b-from-governments-stake/",
+      "facts": "• Image Credits:Intel\n• 2:54 PM PDT · October 30, 2026\n• Intel’s stock suffered one of its worst days ever on Friday, crashing around 28% after the chip giant reported a weaker-than-expected outlook for the fourth quarter."
+    }
+  ]
+}
