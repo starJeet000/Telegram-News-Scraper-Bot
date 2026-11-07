@@ -1,0 +1,24 @@
+{
+  "updatedAt": "2026-11-07T09:01:06.582Z",
+  "briefing": "*Libghostty 1.0*\n• libghostty-vt 1.0 is here.\n• libghostty is a\n• portable, high-performance C library for terminal emulation, extracted\n\n*A barbarian tribe's mythic origin story is true, ancient DNA reveals*\nNo summary available.\n\n*A Jev that can ask Opus for help gives Opus accuracy at 4x lower cost*\n• We wanted to test whether LLMs and decision models, specifically Jev and Luna, could solve a hard problem that we encounter regularly (grading identity resolution results).\n• We found that while both models performed okay out of the box (88.8–97.3% accuracy), implementing a hybrid model that combines Jev + Opus achieves frontier accuracy at > 4x lower costs.\n• Our other findings:",
+  "evidence": [
+    {
+      "source": "Hacker News",
+      "title": "Libghostty 1.0",
+      "url": "https://mitchellh.com/writing/libghostty-1-0",
+      "facts": "• libghostty-vt 1.0 is here.\n• libghostty is a\n• portable, high-performance C library for terminal emulation, extracted"
+    },
+    {
+      "source": "Hacker News",
+      "title": "A barbarian tribe's mythic origin story is true, ancient DNA reveals",
+      "url": "https://www.science.org/content/article/barbarian-tribe-s-mythic-origin-story-true-ancient-dna-reveals",
+      "facts": null
+    },
+    {
+      "source": "Hacker News",
+      "title": "A Jev that can ask Opus for help gives Opus accuracy at 4x lower cost",
+      "url": "https://hightouch.com/blog/llm-judges-identity-resolution",
+      "facts": "• We wanted to test whether LLMs and decision models, specifically Jev and Luna, could solve a hard problem that we encounter regularly (grading identity resolution results).\n• We found that while both models performed okay out of the box (88.8–97.3% accuracy), implementing a hybrid model that combines Jev + Opus achieves frontier accuracy at > 4x lower costs.\n• Our other findings:"
+    }
+  ]
+}
